@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<nav class="breadcrumb">
+    <div class="container">
+        <a href="/">Home</a> / {{ page.title }}
+    </div>
+</nav>
+
+<section class="pricing-hero">
+    <div class="container">
+        <h1>{{ page.title }}</h1>
+        {% if page.introduction %}
+            <div class="pricing-intro">{{ page.introduction|richtext }}</div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="pricing-section">
+    <div class="container">
+        <div class="pricing-grid">
+            {% for tier in page.pricing_tiers.all %}
+
+                <div class="pricing-card{% if tier.is_featured %} featured{% endif %}">
+
+                <h3 class="pricing-name">{{ tier.name }}</h3>
+
+                <div class="pricing-price">
+                    {% if tier.price == 0 %}
+                        <span class="pricing-amount">Free</span>
+                    {% else %}
+                        <span class="pricing-currency">€</span>
+                        <span class="pricing-amount">{{ tier.price|floatformat:"0" }}</span>
+                        <span class="pricing-period">/month</span>
+                    {% endif %}
+                </div>
+
+                {% if tier.description %}
+                    <p class="pricing-description">{{ tier.description }}</p>
+                {% endif %}
+
+                <div class="pricing-features">
+                    {{ tier.features|richtext }}
+                </div>
+
+                {% if tier.stripe_price_id %}
+                    <a href="{% url 'create_checkout_session' %}?price_id={{ tier.stripe_price_id }}"
+                       class="pricing-button{% if tier.is_featured %} pricing-button--featured{% endif %}">
+                        {{ tier.button_text }}
+                    </a>
+                {% else %}
+                    <a href="/" class="pricing-button">
+                        {{ tier.button_text }}
+                    </a>
+                {% endif %}
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

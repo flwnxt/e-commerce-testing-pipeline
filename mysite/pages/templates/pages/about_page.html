@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/">Home</a> <span>/</span> {{ page.title }}
+        </div>
+
+        <div class="section-header">
+            <h1>{{ page.title }}</h1>
+        </div>
+
+        <div class="about-layout">
+            {% if page.team_image %}
+                <div class="about-image">
+                    {% image page.team_image fill-700x525 as team_img %}
+                    <img src="{{ team_img.url }}" alt="{{ page.team_image.title }}">
+                </div>
+            {% endif %}
+
+            <div class="rich-text">
+                {{ page.body|richtext }}
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

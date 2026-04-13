@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="payment-result">
+    <div class="container" style="text-align: center; padding: 4rem 1rem;">
+        <div class="payment-icon payment-icon--cancel">✕</div>
+        <h1>Payment Cancelled</h1>
+        <p>Your payment was not processed. You have not been charged.</p>
+        <p>If you changed your mind, you can always come back later.</p>
+        <a href="/" class="pricing-button"
+           style="display: inline-block; margin-top: 2rem;">
+            Back to Home
+        </a>
+    </div>
+</section>
+{% endblock %}

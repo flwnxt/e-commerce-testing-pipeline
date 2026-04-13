@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<section class="section">
+    <div class="container text-center">
+        <div style="max-width: 520px; margin-inline: auto; padding: var(--space-3xl) 0;">
+            <h1>Thank You!</h1>
+            {% if page.thank_you_text %}
+                <div class="rich-text text-muted mt-md">{{ page.thank_you_text|richtext }}</div>
+            {% else %}
+                <p class="text-muted mt-md">Your message has been sent. We'll get back to you soon.</p>
+            {% endif %}
+            <a href="/" class="btn btn-primary mt-xl">Back to Home</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/">Home</a> <span>/</span> {{ page.title }}
+        </div>
+
+        <div class="section-header">
+            <h1>{{ page.title }}</h1>
+            {% if page.introduction %}
+                <div class="rich-text text-muted">{{ page.introduction|richtext }}</div>
+            {% endif %}
+        </div>
+
+        {% if page.catalog_image %}
+            {% image page.catalog_image fill-1120x400 as cat_img %}
+            <img src="{{ cat_img.url }}" alt="{{ page.title }}" 
+                 style="width:100%; border-radius:var(--radius-lg); margin-bottom:var(--space-xl); object-fit:cover;">
+        {% endif %}
+
+        <div class="card-grid">
+            {% for course in page.get_children.live.specific %}
+                <article class="card fade-in-up">
+                    {% if course.course_image %}
+                        {% image course.course_image fill-600x380 as thumb %}
+                        <img class="card-img" src="{{ thumb.url }}" alt="{{ course.title }}">
+                    {% else %}
+                        <div class="card-img-placeholder">
+                            <span>{{ course.title|truncatewords:3 }}</span>
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h3><a href="{% pageurl course %}">{{ course.title }}</a></h3>
+                        {% if course.instructor %}
+                            <p class="card-meta">By {{ course.instructor }}</p>
+                        {% endif %}
+                        {% if course.description %}
+                            <p class="text-muted card-description">{{ course.description|striptags|truncatewords:25 }}</p>
+                        {% endif %}
+                        {% if course.price %}
+                            <p class="card-price mt-sm">&euro;{{ course.price }}</p>
+                        {% endif %}
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

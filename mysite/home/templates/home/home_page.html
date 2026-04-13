@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+{# ── HERO SECTION ── #}
+<section class="hero">
+    <div class="hero-bg">
+        {% if page.hero_image %}
+            {% image page.hero_image fill-1920x800 as hero_img %}
+            <img src="{{ hero_img.url }}" alt="{{ page.hero_image.title }}">
+        {% endif %}
+    </div>
+    <div class="container">
+        <div class="hero-content fade-in-up">
+            <h1>{{ page.hero_title }}</h1>
+            <div class="rich-text">{{ page.hero_subtitle|richtext }}</div>
+            <div class="hero-actions">
+                <a href="#courses" class="btn btn-primary btn-lg">Browse Courses</a>
+                <a href="{% slugurl 'pricing' %}" class="btn btn-outline btn-lg">See Pricing</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# ── COURSE CATALOG PREVIEWS ── #}
+<section class="section" id="courses">
+    <div class="container">
+        {% for catalog in page.get_children.live.specific %}
+            {% if catalog.get_children.count %}
+            <div class="section-header {% if not forloop.first %}mt-xl{% endif %}">
+                <h2><a href="{% pageurl catalog %}">{{ catalog.title }}</a></h2>
+                {% if catalog.introduction %}
+                    <div class="rich-text text-muted">{{ catalog.introduction|richtext }}</div>
+                {% endif %}
+            </div>
+
+            <div class="card-grid">
+                {% for course in catalog.get_children.live.specific %}
+                    <article class="card fade-in-up">
+                        {% if course.course_image %}
+                            {% image course.course_image fill-600x380 as thumb %}
+                            <div class="card-img-wrapper">
+                                <img class="card-img" src="{{ thumb.url }}" alt="{{ course.title }}">
+                            </div>
+                        {% else %}
+                            <div class="card-img-placeholder">
+                                <span>{{ course.title|truncatewords:3 }}</span>
+                            </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <h3><a href="{% pageurl course %}">{{ course.title }}</a></h3>
+                            {% if course.instructor %}
+                                <p class="card-meta">By {{ course.instructor }}</p>
+                            {% endif %}
+                            {% if course.price %}
+                                <p class="card-price">&euro;{{ course.price }}</p>
+                            {% endif %}
+                            <a href="{% pageurl course %}" class="btn btn-outline mt-md">View course</a>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
