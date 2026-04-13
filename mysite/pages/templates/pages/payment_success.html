@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="payment-result">
+    <div class="container" style="text-align: center; padding: 4rem 1rem;">
+        <div class="payment-icon payment-icon--success">✓</div>
+        <h1>Payment Successful!</h1>
+        <p>Thank you for your purchase. You now have access to your selected plan.</p>
+        <p style="text-align: center"> A confirmation email has been sent to your inbox.</p>
+        <a href="/" class="pricing-button pricing-button--featured" 
+           style="display: inline-block; margin-top: 2rem;">
+            Back to Home
+        </a>
+    </div>
+</section>
+{% endblock %}

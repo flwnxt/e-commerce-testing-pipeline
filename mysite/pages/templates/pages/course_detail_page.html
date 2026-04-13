@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/">Home</a>
+            <span>/</span>
+            <a href="{% pageurl page.get_parent %}">{{ page.get_parent.title }}</a>
+            <span>/</span>
+            {{ page.title }}
+        </div>
+
+        <div class="course-hero">
+            {# ── Left column ── #}
+            <div class="course-main">
+                <h1>{{ page.title }}</h1>
+
+                {% if page.description %}
+                    <div class="text-muted mt-sm rich-text" style="font-size:1.05rem;">{{ page.description|richtext }}</div>
+                {% endif %}
+
+                {% if page.course_image %}
+                    {% image page.course_image fill-800x500 as course_img %}
+                    <img class="course-hero-img mt-lg" src="{{ course_img.url }}" alt="{{ page.title }}">
+                {% endif %}
+
+                {# ── Mobile-only sidebar (shown below description) ── #}
+                <div class="course-sidebar course-sidebar--mobile">
+                    {% if page.price %}
+                        <p class="card-price">&euro;{{ page.price }}</p>
+                    {% endif %}
+                    <ul class="course-meta-list">
+                        {% if page.instructor %}
+                            <li><span>Instructor</span> <span>{{ page.instructor }}</span></li>
+                        {% endif %}
+                        <li><span>Category</span> <span>{{ page.get_parent.title }}</span></li>
+                        <li><span>Format</span> <span>Online / Self-paced</span></li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width:100%; justify-content:center;">Buy This Course</a>
+                    <a href="{% slugurl 'pricing' %}" class="btn btn-outline mt-sm" style="width:100%; justify-content:center;">View All Plans</a>
+                </div>
+
+                {# ── StreamField content ── #}
+                {% if page.course_content %}
+                    <div class="mt-xl">
+                        {% for block in page.course_content %}
+                            {% if block.block_type == 'heading' %}
+                                <h2 class="block-heading">{{ block.value }}</h2>
+
+                            {% elif block.block_type == 'paragraph' %}
+                                <div class="block-paragraph rich-text">{{ block.value }}</div>
+
+                            {% elif block.block_type == 'image' %}
+                                {% image block.value fill-1000x500 as sf_img %}
+                                <img class="block-image" src="{{ sf_img.url }}" alt="{{ block.value.title }}">
+
+                            {% elif block.block_type == 'learning_point' %}
+                                {% if forloop.first or prev_block_type != 'learning_point' %}
+                                    <ul class="learning-points mt-md">
+                                {% endif %}
+                                <li>{{ block.value }}</li>
+                                {% if forloop.last or next_block_type != 'learning_point' %}
+                                    </ul>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            {# ── Desktop-only sidebar (shown on the right) ── #}
+            <div class="course-sidebar course-sidebar--desktop">
+                {% if page.price %}
+                    <p class="card-price">&euro;{{ page.price }}</p>
+                {% endif %}
+                <ul class="course-meta-list">
+                    {% if page.instructor %}
+                        <li><span>Instructor</span> <span>{{ page.instructor }}</span></li>
+                    {% endif %}
+                    <li><span>Category</span> <span>{{ page.get_parent.title }}</span></li>
+                    <li><span>Format</span> <span>Online / Self-paced</span></li>
+                </ul>
+                <a href="#" class="btn btn-primary" style="width:100%; justify-content:center;">Buy This Course</a>
+                <a href="{% slugurl 'pricing' %}" class="btn btn-outline mt-sm" style="width:100%; justify-content:center;">View All Plans</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

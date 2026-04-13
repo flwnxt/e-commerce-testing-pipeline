@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/">Home</a> <span>/</span> {{ page.title }}
+        </div>
+
+        <div class="section-header text-center">
+            <h1>{{ page.title }}</h1>
+            {% if page.introduction %}
+                <div class="rich-text text-muted">{{ page.introduction|richtext }}</div>
+            {% endif %}
+        </div>
+
+        <div class="faq-list">
+            {% for item in page.faq_items.all %}
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        {{ item.question }}
+                    </button>
+                    <div class="faq-answer">
+                        <div class="rich-text">{{ item.answer|richtext }}</div>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-muted">No questions have been added yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
