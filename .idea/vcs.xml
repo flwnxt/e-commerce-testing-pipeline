@@ -2,5 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/docker/jenkins/caches/git-18622ec12c044b2b013b75ff861393da" vcs="Git" />
   </component>
 </project>
