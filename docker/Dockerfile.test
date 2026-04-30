@@ -1,0 +1,52 @@
+# docker/Dockerfile.test
+# =============================================================================
+# Playwright for Python (E2E)
+# =============================================================================
+#
+# We install Playwright's browser binaries and OS dependencies via
+# 'playwright install --with-deps chromium' which handles everything
+# automatically (fonts, libraries, browser binary).
+# =============================================================================
+
+FROM python:3.12-slim
+
+WORKDIR /app
+
+# ---------------------------------------------------------------------------
+# System dependencies
+# ---------------------------------------------------------------------------
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# ---------------------------------------------------------------------------
+# Python dependencies
+# ---------------------------------------------------------------------------
+COPY mysite/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt \
+    && pip install --no-cache-dir \
+        playwright \
+        pytest \
+        pytest-playwright \
+        pytest-html \
+        locust \
+        "psycopg[binary]"
+
+# ---------------------------------------------------------------------------
+# Install Chromium browser for Playwright
+# ---------------------------------------------------------------------------
+RUN playwright install --with-deps chromium
+
+# ---------------------------------------------------------------------------
+# Copy test source code
+# ---------------------------------------------------------------------------
+COPY ../mysite/tests/ /app/tests/
+
+# Copy Django project (needed for manage.py seed commands)
+COPY mysite/ /app/
+
+# Ensure the active working directory is  /app
+WORKDIR /app
+
+# Default: keep container running so Jenkins can exec into it
+CMD ["sleep", "infinity"]

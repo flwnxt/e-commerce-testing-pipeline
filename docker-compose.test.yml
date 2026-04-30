@@ -1,0 +1,79 @@
+# docker-compose.test.yml
+# =============================================================================
+# Test pipeline orchestration
+# =============================================================================
+# This file defines the test environment used by the Jenkins pipeline.
+# Three services work together:
+#
+#   db   → PostgreSQL database (handles concurrent load from Locust)
+#   web  → Wagtail application (the system under test)
+#   tests → Playwright + Locust test runner
+#
+# The test container connects to the app via Docker's internal network
+# at http://web:8000 — no ports are exposed to the host.
+# =============================================================================
+
+services:
+
+  # ---------------------------------------------------------------------------
+  # PostgreSQL — test database
+  # ---------------------------------------------------------------------------
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: learnhub_test
+      POSTGRES_USER: learnhub
+      POSTGRES_PASSWORD: learnhub_test_pw
+    # tmpfs stores the database in memory — faster for tests, no cleanup needed
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U learnhub -d learnhub_test"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  # ---------------------------------------------------------------------------
+  # Wagtail application — system under test
+  # ---------------------------------------------------------------------------
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DJANGO_SETTINGS_MODULE=mysite.settings.test
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    # Start the app: run migrations, seed test data, then start the server.
+    command: >
+      sh -c "
+        python manage.py migrate --noinput &&
+        python manage.py runserver 0.0.0.0:8000
+      "
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/')\""]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 15s
+
+  # ---------------------------------------------------------------------------
+  # Test runner — Playwright (E2E) + Locust (performance)
+  # ---------------------------------------------------------------------------
+  tests:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.test
+    environment:
+      - BASE_URL=http://web:8000
+      - DJANGO_SETTINGS_MODULE=mysite.settings.test
+    env_file:
+      - .env
+    depends_on:
+      web:
+        condition: service_healthy
+    volumes:
+      - ./test-results:/app/test-results
