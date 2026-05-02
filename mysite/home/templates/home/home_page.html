@@ -36,7 +36,7 @@
 
             <div class="card-grid">
                 {% for course in catalog.get_children.live.specific %}
-                    <article class="card fade-in-up">
+                    <article class="card fade-in-up" data-testid="home-course-card">
                         {% if course.course_image %}
                             {% image course.course_image fill-600x380 as thumb %}
                             <div class="card-img-wrapper">
@@ -48,7 +48,7 @@
                             </div>
                         {% endif %}
                         <div class="card-body">
-                            <h3><a href="{% pageurl course %}">{{ course.title }}</a></h3>
+                            <h3><a href="{% pageurl course %}" data-testid="home-course-title-link">{{ course.title }}</a></h3>
                             {% if course.instructor %}
                                 <p class="card-meta">By {{ course.instructor }}</p>
                             {% endif %}

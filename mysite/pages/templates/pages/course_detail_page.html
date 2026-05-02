@@ -4,7 +4,7 @@
 {% block content %}
 <section class="section">
     <div class="container">
-        <div class="breadcrumb">
+        <div class="breadcrumb" data-testid="detail-breadcrumb">
             <a href="/">Home</a>
             <span>/</span>
             <a href="{% pageurl page.get_parent %}">{{ page.get_parent.title }}</a>
@@ -15,7 +15,7 @@
         <div class="course-hero">
             {# ── Left column ── #}
             <div class="course-main">
-                <h1>{{ page.title }}</h1>
+                <h1 data-testid="detail-heading">{{ page.title }}</h1>
 
                 {% if page.description %}
                     <div class="text-muted mt-sm rich-text" style="font-size:1.05rem;">{{ page.description|richtext }}</div>
@@ -29,7 +29,7 @@
                 {# ── Mobile-only sidebar (shown below description) ── #}
                 <div class="course-sidebar course-sidebar--mobile">
                     {% if page.price %}
-                        <p class="card-price">&euro;{{ page.price }}</p>
+                        <p class="card-price" data-testid="detail-price">&euro;{{ page.price }}</p>
                     {% endif %}
                     <ul class="course-meta-list">
                         {% if page.instructor %}
@@ -73,7 +73,7 @@
             {# ── Desktop-only sidebar (shown on the right) ── #}
             <div class="course-sidebar course-sidebar--desktop">
                 {% if page.price %}
-                    <p class="card-price">&euro;{{ page.price }}</p>
+                    <p class="card-price" data-testid="detail-price">&euro;{{ page.price }}</p>
                 {% endif %}
                 <ul class="course-meta-list">
                     {% if page.instructor %}
