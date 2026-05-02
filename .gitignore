@@ -19,5 +19,6 @@ Thumbs.db
 # Logs
 *.log
 
-# Docker (only logs, not whole Jenkins config)
+# Docker
 docker/jenkins/
+docker/jenkins/logs
