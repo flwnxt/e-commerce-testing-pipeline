@@ -16,5 +16,8 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# Docker
+# Logs
+*.log
+
+# Docker (only logs, not whole Jenkins config)
 docker/jenkins/
