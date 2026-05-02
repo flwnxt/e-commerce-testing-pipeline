@@ -12,6 +12,9 @@
 
 import pytest
 
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "e2e"))
 
 @pytest.fixture(scope="session")
 def browser_type_launch_args():
