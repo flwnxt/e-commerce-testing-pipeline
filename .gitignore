@@ -21,3 +21,6 @@ Thumbs.db
 
 # Docker
 docker/jenkins/
+
+# Notes
+notes.md
