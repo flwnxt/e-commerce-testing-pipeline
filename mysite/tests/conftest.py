@@ -23,7 +23,7 @@ def browser_type_launch_args():
     Headless mode is used in CI (no display available).
     """
     return {
-        "headless": True,
+        "headless": os.environ.get("CI", "false").lower() == "true",
     }
 
 
