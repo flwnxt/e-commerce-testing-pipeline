@@ -1163,11 +1163,12 @@
             </a>
 
             <nav>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="/"{% if page.pk == page.get_site.root_page.pk %}class="active"{% endif %}>Home</a></li>
+                <ul class="nav-links" id="navLinks" data-testid="nav-links">
+                    <li><a href="/" data-testid="nav-link-home" {% if page.pk == page.get_site.root_page.pk %}class="active"{% endif %}>Home</a></li>
                     {% for item in page.get_site.root_page.get_children.live.in_menu %}
                         <li>
                             <a href="{% pageurl item %}"
+                               data-testid="nav-link-{{ item.slug }}"
                                {% if item.pk == page.pk %}class="active"{% endif %}>
                                 {{ item.title }}
                             </a>
