@@ -17,11 +17,11 @@
 
         <div class="faq-list">
             {% for item in page.faq_items.all %}
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
+                <div class="faq-item" data-testid="faq-item">
+                    <button class="faq-question" aria-expanded="false" data-testid="faq-question-button">
                         {{ item.question }}
                     </button>
-                    <div class="faq-answer">
+                    <div class="faq-answer" data-testid="faq-answer">
                         <div class="rich-text">{{ item.answer|richtext }}</div>
                     </div>
                 </div>
