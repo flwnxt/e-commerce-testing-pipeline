@@ -46,7 +46,9 @@
 
                 {% if tier.stripe_price_id %}
                     <a href="{% url 'create_checkout_session' %}?price_id={{ tier.stripe_price_id }}"
-                       class="pricing-button{% if tier.is_featured %} pricing-button--featured{% endif %}">
+                       class="pricing-button{% if tier.is_featured %} pricing-button--featured{% endif %}"
+                           data-testid="pricing-buy-button">
+
                         {{ tier.button_text }}
                     </a>
                 {% else %}
