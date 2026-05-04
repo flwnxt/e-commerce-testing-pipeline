@@ -8,7 +8,7 @@
 # automatically (fonts, libraries, browser binary).
 # =============================================================================
 
-FROM python:3.12-slim
+FROM python:3.12
 
 WORKDIR /app
 
@@ -40,11 +40,7 @@ RUN pip install --no-cache-dir -r requirements.txt -r requirements-test.txt \
 # Install Chromium browser for Playwright
 # ---------------------------------------------------------------------------
 
-# Install OS-level dependencies that Chromium needs
-RUN playwright install-deps chromium
-
-# Install the Chromium browser binary
-RUN playwright install chromium
+RUN playwright install --with-deps chromium
 
 # ---------------------------------------------------------------------------
 # Copy test source code
