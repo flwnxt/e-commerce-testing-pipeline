@@ -17,6 +17,9 @@ WORKDIR /app
 # ---------------------------------------------------------------------------
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
+    wget \
+    ca-certificates \
+    gnupg \
     && rm -rf /var/lib/apt/lists/*
 
 # ---------------------------------------------------------------------------
@@ -36,7 +39,12 @@ RUN pip install --no-cache-dir -r requirements.txt -r requirements-test.txt \
 # ---------------------------------------------------------------------------
 # Install Chromium browser for Playwright
 # ---------------------------------------------------------------------------
-RUN playwright install --with-deps chromium
+
+# Install OS-level dependencies that Chromium needs
+RUN playwright install-deps chromium
+
+# Install the Chromium browser binary
+RUN playwright install chromium
 
 # ---------------------------------------------------------------------------
 # Copy test source code
