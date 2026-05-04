@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # ---------------------------------------------------------------------------
 COPY mysite/requirements.txt /app/requirements.txt
 COPY requirements-test.txt /app/requirements-test.txt
-RUN pip install --no-cache-dir -r requirements.txt -r requirements-test.txt
+RUN pip install --no-cache-dir -r requirements.txt -r requirements-test.txt \
     && pip install --no-cache-dir \
         playwright \
         pytest \
@@ -41,7 +41,7 @@ RUN playwright install --with-deps chromium
 # ---------------------------------------------------------------------------
 # Copy test source code
 # ---------------------------------------------------------------------------
-COPY ../mysite/tests/ /app/tests/
+COPY /mysite/tests/ /app/tests/
 
 # Copy Django project (needed for manage.py seed commands)
 COPY mysite/ /app/
