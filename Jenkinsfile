@@ -36,6 +36,7 @@ pipeline {
                 withCredentials([file(credentialsId: 'learnhub-env-file', variable: 'ENV_FILE')]) {
                     sh 'cp $ENV_FILE .env'
                 }
+                sh 'mkdir -p test-results/playwright test-results/locust'
                 sh 'docker compose build'
                 sh 'docker compose up -d'
                 // Wait for the web healthcheck to pass
