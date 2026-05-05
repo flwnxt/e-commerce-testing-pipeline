@@ -67,10 +67,11 @@ RUN playwright install chromium
 # ---------------------------------------------------------------------------
 # Copy test source code
 # ---------------------------------------------------------------------------
-COPY /mysite/tests/ /app/tests/
+COPY mysite/ /app/
+
 
 # Copy Django project (needed for manage.py seed commands)
-COPY mysite/ /app/
+COPY /mysite/tests/ /app/tests/
 
 # Ensure the active working directory is  /app
 WORKDIR /app
