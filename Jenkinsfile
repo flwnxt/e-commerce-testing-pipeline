@@ -69,7 +69,7 @@ pipeline {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                     sh '''
                         docker compose exec -T tests \
-                            pytest tests/e2e/ \
+                            pytest tests/e2e/tests \
                             --browser chromium \
                             --base-url http://web:8000 \
                             --html=/app/test-results/playwright/report.html \
