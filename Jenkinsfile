@@ -33,6 +33,9 @@ pipeline {
         // ---------------------------------------------------------------------
         stage('Build') {
             steps {
+                withCredentials([file(credentialsId: 'learnhub-env-file', variable: 'ENV_FILE')]) {
+                    sh 'cp $ENV_FILE .env'
+                }
                 sh 'docker compose build'
                 sh 'docker compose up -d'
                 // Wait for the web healthcheck to pass
