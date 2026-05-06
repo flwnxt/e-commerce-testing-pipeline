@@ -39,6 +39,8 @@ pipeline {
                 sh 'docker compose build'
                 sh 'mkdir -p test-results/playwright test-results/locust'
                 sh 'docker compose up -d'
+                sh 'docker compose exec -T web python manage.py migrate'
+                sh 'docker compose exec -T web python manage.py loaddata initial_content.json'
                 // Wait for the web healthcheck to pass
                 sh '''
                     echo "Waiting for Wagtail to be ready..."
