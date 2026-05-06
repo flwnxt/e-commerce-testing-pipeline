@@ -92,6 +92,7 @@ pipeline {
         // ---------------------------------------------------------------------
         stage('Performance Tests') {
             steps {
+                sh 'docker compose exec -T tests mkdir -p /app/test-results/locust'
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                     sh '''
                         docker compose exec -T tests \
