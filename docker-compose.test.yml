@@ -70,6 +70,7 @@ services:
     environment:
       - BASE_URL=http://web:8000
       - DJANGO_SETTINGS_MODULE=mysite.settings.test
+      - CI=true
     env_file:
       - .env
     depends_on:
