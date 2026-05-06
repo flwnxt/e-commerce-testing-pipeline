@@ -17,13 +17,18 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "e2e"))
 
 @pytest.fixture(scope="session")
-def browser_type_launch_args():
+def browser_type_launch_args(pytestconfig):
     """
     Browser launch arguments — applied once per test session.
-    Headless mode is used in CI (no display available).
+    Runs headless by default (safe for Docker/CI with no X server).
+    Headed mode can be explicitly enabled with:
+      - pytest flag: --headed
+      - env var: PLAYWRIGHT_HEADED=true
     """
+    headed_from_cli = bool(pytestconfig.getoption("headed"))
+    headed_from_env = os.environ.get("PLAYWRIGHT_HEADED", "false").lower() in {"1", "true", "yes"}
     return {
-        "headless": os.environ.get("CI", "false").lower() == "true",
+        "headless": not (headed_from_cli or headed_from_env),
     }
 
 
