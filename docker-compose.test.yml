@@ -76,5 +76,5 @@ services:
     depends_on:
       web:
         condition: service_healthy
-    volumes:
-      - ./test-results:/app/test-results
+#    volumes:
+#      - ./test-results:/app/test-results
