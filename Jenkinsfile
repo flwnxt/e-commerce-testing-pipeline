@@ -68,7 +68,7 @@ pipeline {
         stage('E2E Tests') {
             steps {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                  sh 'docker compose exec -T tests mkdir -p /app/test-results/playwright'
+                    sh 'docker compose exec -T tests mkdir -p /app/test-results/playwright'
                     sh '''
                         docker compose exec -T tests \
                             pytest tests/e2e/tests \
