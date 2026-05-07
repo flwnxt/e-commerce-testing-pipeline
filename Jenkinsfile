@@ -67,7 +67,6 @@ pipeline {
         // ---------------------------------------------------------------------
         stage('E2E Tests') {
             steps {
-                sh 'docker compose exec -T tests mkdir -p /app/test-results/playwright'
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                     sh '''
                         docker compose exec -T tests \
@@ -94,7 +93,6 @@ pipeline {
         // ---------------------------------------------------------------------
         stage('Performance Tests') {
             steps {
-                sh 'docker compose exec -T tests mkdir -p /app/test-results/locust'
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                     sh '''
                         docker compose exec -T tests \
