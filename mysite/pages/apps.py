@@ -1,5 +1,14 @@
+"""
+mysite/pages/apps.py
+"""
+
 from django.apps import AppConfig
 
 
 class PagesConfig(AppConfig):
-    name = 'pages'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "pages"
+
+    def ready(self):
+        from pages import signals  # noqa
+        signals.register()

@@ -9,6 +9,9 @@ from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
 from modelcluster.fields import ParentalKey
 
+from django.contrib.auth import get_user_model
+from django.utils import timezone
+
 
 
 class AboutPage(Page):
@@ -279,3 +282,39 @@ class PricingPage(Page):
 
     class Meta:
         verbose_name = "Pricing Page"
+
+
+User = get_user_model()
+
+class Enrollment(models.Model):
+    """
+    Records a user's enrollment in a CourseDetailPage.
+
+    Used by all 3 performance APIs:
+      - /api/user/my-courses/        → filters by user
+      - /api/courses/search/         → no direct use, but course data comes from CourseDetailPage
+      - /api/courses/recommendations/ → annotates courses with enrollment count
+    """
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="enrollments",
+    )
+    course = models.ForeignKey(
+        "pages.CourseDetailPage",
+        on_delete=models.CASCADE,
+        related_name="enrollments",
+    )
+    enrolled_at = models.DateTimeField(default=timezone.now)
+    amount_paid = models.DecimalField(max_digits=8, decimal_places=2)
+
+    class Meta:
+        ordering = ["-enrolled_at"]
+        unique_together = [("user", "course")]
+        indexes = [
+            models.Index(fields=["user"], name="enrollment_user_idx"),
+            models.Index(fields=["course"], name="enrollment_course_idx"),
+        ]
+
+    def __str__(self):
+        return f"{self.user.email} → {self.course.title}"
