@@ -78,6 +78,8 @@ pipeline {
                             -v
                     '''
                 }
+                // Copy report from container to Jenkins workspace
+                sh 'docker compose cp tests:/app/test-results/playwright/report.html test-results/playwright/report.html || true'
             }
         }
 
@@ -106,6 +108,9 @@ pipeline {
                             --csv=/app/test-results/locust/results
                     '''
                 }
+                // Copy reports from container to Jenkins workspace
+                sh 'docker compose cp tests:/app/test-results/locust/report.html test-results/locust/report.html || true'
+                sh 'docker compose cp tests:/app/test-results/locust/results_stats.csv test-results/locust/results_stats.csv || true'
             }
         }
 
