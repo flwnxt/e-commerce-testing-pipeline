@@ -52,6 +52,7 @@ pipeline {
                 '''
                 sh 'docker compose exec -T web python manage.py migrate'
                 sh 'docker compose exec -T web python manage.py loaddata /app/fixtures/initial_content.json'
+                sh 'docker compose exec -T web python manage.py seed_test_data --count=500'
             }
         }
 
