@@ -21,6 +21,8 @@ from django.core.paginator import Paginator
 from django.db.models import Avg, Count, Max, Sum
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
+from django.contrib.auth import authenticate, login as auth_login
+from django.views.decorators.csrf import csrf_exempt
 
 from pages.models import CourseDetailPage, Enrollment
 
@@ -391,3 +393,17 @@ def invalidate_recommendations_cache():
                 invalidate_recommendations_cache()
     """
     cache.delete(RECOMMENDATIONS_CACHE_KEY)
+
+@csrf_exempt
+def locust_login(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+        except Exception:
+            return JsonResponse({"status": "bad request"}, status=400)
+        user = authenticate(request, username=data.get("username"), password=data.get("password"))
+        if user:
+            auth_login(request, user)
+            return JsonResponse({"status": "ok"})
+        return JsonResponse({"status": "unauthorized"}, status=401)
+    return JsonResponse({"status": "method not allowed"}, status=405)

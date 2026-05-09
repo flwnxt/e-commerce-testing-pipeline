@@ -26,7 +26,7 @@ from locust import HttpUser, between, task
 # ---------------------------------------------------------------------------
 # Credentials — override via environment variables in CI
 # ---------------------------------------------------------------------------
-TEST_USER_NAME = os.environ.get("LOCUST_USER_EMAIL", "seed_user_0001")
+TEST_USER_USERNAME = os.environ.get("TEST_USER_USERNAME", "seed_user_0001")
 TEST_USER_PASSWORD = os.environ.get("LOCUST_USER_PASSWORD", "TestPass123!")
 
 
@@ -47,26 +47,13 @@ class LearnHubUser(HttpUser):
 
     def on_start(self):
         """
-        Log in via Django's session auth before running any tasks.
-
-        Why session auth and not a token?
-        The APIs use @login_required which checks the Django session cookie.
-        Locust's HttpSession automatically stores and sends cookies, so after
-        a successful login POST, every subsequent request is authenticated.
+        Log in via the dedicated Locust login endpoint.
+        @csrf_exempt means no CSRF token needed.
+        Locust's HttpSession stores the sessionid cookie automatically.
         """
-        # Step 1: GET the login page to retrieve the CSRF token
-        response = self.client.get("/django-admin/login/")
-        csrf_token = response.cookies.get("csrftoken")
-
-        # Step 2: POST credentials with the CSRF token
         self.client.post(
-            "/django-admin/login/",
-            data={
-                "username": TEST_USER_NAME,
-                "password": TEST_USER_PASSWORD,
-                "csrfmiddlewaretoken": csrf_token,
-            },
-            headers={"Referer": f"{self.host}/django-admin/login/"},
+            "/api/locust-login/",
+            json={"username": TEST_USER_USERNAME, "password": TEST_USER_PASSWORD},
         )
 
     # -----------------------------------------------------------------------
