@@ -23,6 +23,7 @@ urlpatterns = [
 
     path("search/", search_views.search, name="search"),
     path("api/", include("api.urls")),
+    path("silk/", include("silk.urls", namespace="silk")),
     path('', include(wagtailcore_urls)),  # Wagtail catch-all — LAST
 ]
 
