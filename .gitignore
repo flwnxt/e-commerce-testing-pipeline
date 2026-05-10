@@ -24,3 +24,6 @@ docker/jenkins/
 
 # Notes
 notes.md
+
+# Database
+*.sqlite3
