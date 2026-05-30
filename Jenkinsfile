@@ -77,7 +77,7 @@ pipeline {
                             --base-url http://web:8000 \
                             --html=/app/test-results/playwright/report.html \
                             --self-contained-html \
-                            --css=mysite/tests/e2e/custom.css \
+//                             --css=mysite/tests/e2e/custom.css \
                             -v
                     '''
                 }
