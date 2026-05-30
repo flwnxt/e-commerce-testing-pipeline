@@ -1,5 +1,226 @@
 [
 {
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$SyzcGeqnv3hdvhM3TtXl16$83rj4rnGY0FmiISBGi4KM5/0T8JLaYHFLa02A3bjCBc=",
+    "last_login": "2026-03-17T19:15:43.606Z",
+    "is_superuser": true,
+    "username": "florescul",
+    "first_name": "",
+    "last_name": "",
+    "email": "florescu.stefan96@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-03-15T17:19:20.979Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$iHBDqZTcE9A1EaWCoC3Ubt$/Cj5CBfB2GpDJAUj6wUs+x086SfG13lt6BmuSHaQv9o=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "mav",
+    "first_name": "",
+    "last_name": "",
+    "email": "itech.florescu@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-03-15T17:20:20.089Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$z4vl4Pjj3HQv2kAg4LxK9L$F2i36Dnh0OQwnJLnbgIn3V9Xv1oe/qi8E2cEucmNH7Q=",
+    "last_login": "2026-05-30T15:52:27.006Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "florescu.stefan96@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-03-31T18:41:28.962Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$UmGOcPskm1SngnSrqreiEr$OBBk2Aj0xWxC5h3JiIlRWmEbMcWH4d+ecq00OU/p0hc=",
+    "last_login": "2026-05-11T09:31:37.946Z",
+    "is_superuser": false,
+    "username": "seed_user_0001",
+    "first_name": "",
+    "last_name": "",
+    "email": "seed_user_0001@test.local",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-08T18:21:48.560Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$4QMnWdX8rxWudvFPsXnztF$YHwPmZS5vf3TioJqxNJwRBHX4naCYexINnbNO3/CoCo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "seed_user_0002",
+    "first_name": "",
+    "last_name": "",
+    "email": "seed_user_0002@test.local",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-08T18:21:48.699Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$H9OJN9Cy2CLSIBuemFU2c4$xLzJNX+mLopPHy4i3X9LnUdjAJa/Al0UULHs/3Fm+0k=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "seed_user_0003",
+    "first_name": "",
+    "last_name": "",
+    "email": "seed_user_0003@test.local",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-08T18:21:48.837Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$1bKTAeHDNTCTRYoheFyd4B$3riRbeEe1h1Yl34REteyPZtl2PzOKhUzOR4NpJIFmYc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "seed_user_0004",
+    "first_name": "",
+    "last_name": "",
+    "email": "seed_user_0004@test.local",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-08T18:21:48.969Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$tcDrKmdKSdDr8KoKKhWa63$eLc46Lx8ZaecULJ9vzLJCWDqMW27c3A8gpFbq1G3H8s=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "seed_user_0005",
+    "first_name": "",
+    "last_name": "",
+    "email": "seed_user_0005@test.local",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-08T18:21:49.104Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$tCj4iEg7TiZN5qKa23Yo5i$7BM7BBpYCqtczAtHhHEi3KTTlyYRsFJPfR8DHsEFpdE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "seed_user_0006",
+    "first_name": "",
+    "last_name": "",
+    "email": "seed_user_0006@test.local",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-08T18:21:49.237Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$B99V5amtkm6gklPAk5L0Tm$HnWEU81bu0WcY53Xw9uFzjtB4eQzj8fb4NHA75wjUZg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "seed_user_0007",
+    "first_name": "",
+    "last_name": "",
+    "email": "seed_user_0007@test.local",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-08T18:21:49.371Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$g4hTyb8UjHyPk2CWBD9EaQ$gDTcuc8zGFPAL4FF7b6pJQ+OI9z7rNfBxSpDQrq9V54=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "seed_user_0008",
+    "first_name": "",
+    "last_name": "",
+    "email": "seed_user_0008@test.local",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-08T18:21:49.503Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$RxrbG6LaOs0AUcwpN2ugkj$R3tFDyrKv81SS5oxf/Sbk3B3XmXxh4b4/tNVbN08i90=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "seed_user_0009",
+    "first_name": "",
+    "last_name": "",
+    "email": "seed_user_0009@test.local",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-08T18:21:49.638Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$EKe8ArMDdhOZlxD0RyqQ90$z2Zmvc79FuMpfU4VZrGIw2YRygNKRHxCzWWxGy7pLWc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "seed_user_0010",
+    "first_name": "",
+    "last_name": "",
+    "email": "seed_user_0010@test.local",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-08T18:21:49.772Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
   "model": "wagtailcore.page",
   "fields": {
     "path": "0001",
