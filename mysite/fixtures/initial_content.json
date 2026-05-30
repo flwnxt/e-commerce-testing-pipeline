@@ -8616,6 +8616,57 @@
   }
 },
 {
+  "model": "pages.contactformfield",
+  "pk": 1,
+  "fields": {
+    "sort_order": 1,
+    "clean_name": "email",
+    "label": "Email",
+    "field_type": "email",
+    "required": true,
+    "choices": "",
+    "default_value": "",
+    "help_text": "Introdu email",
+    "page": [
+      "/home/contact-page/"
+    ]
+  }
+},
+{
+  "model": "pages.contactformfield",
+  "pk": 2,
+  "fields": {
+    "sort_order": 0,
+    "clean_name": "name",
+    "label": "Name",
+    "field_type": "singleline",
+    "required": true,
+    "choices": "",
+    "default_value": "",
+    "help_text": "",
+    "page": [
+      "/home/contact-page/"
+    ]
+  }
+},
+{
+  "model": "pages.contactformfield",
+  "pk": 3,
+  "fields": {
+    "sort_order": 2,
+    "clean_name": "message",
+    "label": "Message",
+    "field_type": "multiline",
+    "required": true,
+    "choices": "",
+    "default_value": "",
+    "help_text": "",
+    "page": [
+      "/home/contact-page/"
+    ]
+  }
+},
+{
   "model": "pages.faqpage",
   "fields": {
     "page_ptr": [
