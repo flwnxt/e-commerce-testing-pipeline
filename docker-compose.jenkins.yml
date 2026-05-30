@@ -9,7 +9,9 @@ services:
       - "8080:8080"
       - "50000:50000"
     volumes:
+      # Eveything what jenkins does is saved on local machine
       - ./docker/jenkins:/var/jenkins_home
+      # Direct communication with the Docker Daemon's host
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
     environment:

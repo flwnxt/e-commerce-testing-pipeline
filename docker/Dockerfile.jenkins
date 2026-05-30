@@ -1,9 +1,16 @@
+// Get the Jenkins image
 FROM jenkins/jenkins:lts
 
+// By default, Jenkins does not use the 'root USER' (security)
+// Switch to the "USER root"
 USER root
 
+// Update the available package list
+// Install curl and use curl to install the official Docker CLI into the Jenkins container
+// These commands help us to run "docker" commands within the pipeline
 RUN apt-get update && \
     apt-get install -y curl && \
     curl -fsSL https://get.docker.com | sh
 
+// Switch back from "root" user to "jenkins" user
 USER jenkins

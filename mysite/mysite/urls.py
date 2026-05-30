@@ -17,7 +17,7 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
 
     # Stripe checkout URLs — MUST be before Wagtail catch-all
-    path('payment/checkout/', create_checkout_session, name='create_checkout_session'),
+    path('payment/initiate-checkout/', create_checkout_session, name='create_checkout_session'),
     path('payment/success/', payment_success, name='payment_success'),
     path('payment/cancel/', payment_cancel, name='payment_cancel'),
 
