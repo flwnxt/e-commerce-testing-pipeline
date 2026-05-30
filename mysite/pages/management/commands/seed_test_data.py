@@ -81,18 +81,27 @@ class Command(BaseCommand):
     # ── helpers ──────────────────────────────────────────────────────────────
 
     def _clear_seed_data(self):
-        # Enrollments are deleted via CASCADE when courses are deleted
-        deleted_courses, _ = (
-            CourseDetailPage.objects
-            .filter(title__startswith=SEED_PREFIX)
-            .delete()
-        )
+        # Must delete Wagtail pages individually — bulk .delete() returns None
+        seed_courses = CourseDetailPage.objects.filter(title__startswith=SEED_PREFIX)
+        course_count = seed_courses.count()
+        for page in seed_courses:
+            page.delete()
+
+        seed_catalogs = CourseCatalogPage.objects.filter(title__startswith=SEED_PREFIX)
+        catalog_count = seed_catalogs.count()
+        for page in seed_catalogs:
+            page.delete()
+
         deleted_users, _ = (
             User.objects
             .filter(email__startswith="seed_user_")
             .delete()
         )
-        self.stdout.write(f"🗑  Cleared {deleted_courses} seeded courses, {deleted_users} seeded users.")
+        self.stdout.write(
+            f"🗑  Cleared {course_count} seeded courses, "
+            f"{catalog_count} seeded catalogs, "
+            f"{deleted_users} seeded users."
+        )
 
     def _get_or_create_catalog(self):
         catalog = CourseCatalogPage.objects.filter(
