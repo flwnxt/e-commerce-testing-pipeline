@@ -29,7 +29,7 @@ from page_objects.navigation_component import NavigationComponent
 EXPECTED_NAV_LINKS = {
     "home": "Home",
     "pricing": "Pricing",
-    "about-page": "About Us",          # ← intentional failure: admin shows "About is"
+    "about-page": "About us",          # ← intentional failure: admin shows "About is"
     "contact-page": "Contact page",
     "faq-page": "FAQ Page",
 }
