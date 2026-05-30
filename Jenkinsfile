@@ -77,10 +77,10 @@ pipeline {
                             --base-url http://web:8000 \
                             --html=/app/test-results/playwright/report.html \
                             --self-contained-html \
-//                             --css=mysite/tests/e2e/custom.css \
                             -v
                     '''
                 }
+                // --css=mysite/tests/e2e/custom.css \
                 // Copy report from container to Jenkins workspace
                 sh 'docker compose cp tests:/app/test-results/playwright/report.html test-results/playwright/report.html || true'
             }
