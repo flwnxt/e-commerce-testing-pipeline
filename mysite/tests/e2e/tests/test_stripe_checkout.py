@@ -73,4 +73,5 @@ class TestStripeCheckout:
 
         # Step 3: Verify we landed on the cancel page
         cancel = PaymentCancelPage(page)
+        cancel.wait_for_cancel_page()
         cancel.expect_visible()

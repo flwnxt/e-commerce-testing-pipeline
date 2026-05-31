@@ -34,6 +34,10 @@ class PaymentCancelPage:
         self.page = page
         self.heading = page.get_by_test_id("payment-cancel-heading")
 
+    def wait_for_cancel_page(self) -> None:
+        """Wait until the cancel page has fully loaded."""
+        self.page.wait_for_url("**/payment/cancel/**", timeout=15000)
+
     def expect_visible(self) -> None:
         """Assert the cancel heading is visible — confirms cancel redirect."""
         expect(self.heading).to_be_visible()
