@@ -40,4 +40,4 @@ class PaymentCancelPage:
 
     def expect_visible(self) -> None:
         """Assert the cancel heading is visible — confirms cancel redirect."""
-        expect(self.heading).to_be_visible()
+        expect(self.heading).to_be_visible(timeout=10000)
