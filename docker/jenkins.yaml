@@ -1,0 +1,49 @@
+jenkins:
+  systemMessage: "LearnHub CI/CD Pipeline — configured automatically via JCasC"
+
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "admin"
+
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+
+jobs:
+  - script: |
+      pipelineJob('learnhub-green') {
+        description('Pipeline principal — development-green-pipeline — toate testele trec')
+        definition {
+          cpsScm {
+            scm {
+              git {
+                remote {
+                  url('https://github.com/flwnxt/e-commerce-testing-pipeline')
+                }
+                branch('*/development-green-pipeline')
+              }
+            }
+            scriptPath('Jenkinsfile')
+          }
+        }
+      }
+  - script: |
+      pipelineJob('learnhub-unstable') {
+        description('Pipeline regresie — testele Stripe pică — build UNSTABLE')
+        definition {
+          cpsScm {
+            scm {
+              git {
+                remote {
+                  url('https://github.com/flwnxt/e-commerce-testing-pipeline')
+                }
+                branch('*/development-checkout-route')
+              }
+            }
+            scriptPath('Jenkinsfile')
+          }
+        }
+      }

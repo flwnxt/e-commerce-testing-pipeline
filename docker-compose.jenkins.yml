@@ -13,6 +13,8 @@ services:
       - ./docker/jenkins:/var/jenkins_home
       # Direct communication with the Docker Daemon's host
       - /var/run/docker.sock:/var/run/docker.sock
+      # Add pipeline settings when jenkins builds
+      - ./docker/jenkins.yaml:/var/jenkins_home/casc_configs/jenkins.yaml
     restart: unless-stopped
     environment:
-      JAVA_OPTS: "-Dhudson.model.DirectoryBrowserSupport.CSP=\"\""
+      JAVA_OPTS: "-Dhudson.model.DirectoryBrowserSupport.CSP=\"\" -Djenkins.install.runSetupWizard=false"

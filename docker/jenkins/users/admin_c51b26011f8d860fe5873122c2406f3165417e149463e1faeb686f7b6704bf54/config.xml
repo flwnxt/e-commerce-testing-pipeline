@@ -2,7 +2,7 @@
 <user>
   <version>10</version>
   <id>admin</id>
-  <fullName>Florescu Dan Stefan</fullName>
+  <fullName>admin</fullName>
   <properties>
     <io.jenkins.plugins.thememanager.ThemeUserProperty plugin="theme-manager@346.v06cca_64c6a_37">
       <theme class="io.jenkins.plugins.darktheme.DarkThemeManagerFactory" plugin="dark-theme@652.vea_da_dfea_e769"/>
@@ -44,9 +44,6 @@
     <jenkins.model.experimentalflags.UserExperimentalFlagsProperty>
       <flags/>
     </jenkins.model.experimentalflags.UserExperimentalFlagsProperty>
-    <hudson.security.HudsonPrivateSecurityRealm_-Details>
-      <passwordHash>#jbcrypt:$2a$10$14RoOyMKynZPDMK0fWTu4eFOoIbr2gp8IO76vCFCNSvq3pW2EGB7u</passwordHash>
-    </hudson.security.HudsonPrivateSecurityRealm_-Details>
     <hudson.tasks.Mailer_-UserProperty plugin="mailer@534.v1b_36f5864073">
       <emailAddress>florescu.stefan96@gmail.com</emailAddress>
     </hudson.tasks.Mailer_-UserProperty>
@@ -61,5 +58,8 @@
       </roles>
       <timestamp>1776065688632</timestamp>
     </jenkins.security.LastGrantedAuthoritiesProperty>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>#jbcrypt:$2a$10$Sq6c1rcWbp6IZmE35l4BsuL8aDVFpJZC0/HV6HxVsRU2HeX7fLn82</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
   </properties>
 </user>
